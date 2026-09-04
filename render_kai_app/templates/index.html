@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KAI Local Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>KAI Local Web App</h1>
+        <p>Render-compatible Python backend with a simple browser UI.</p>
+      </header>
+
+      <main class="grid">
+        <section class="card">
+          <h2>Add API</h2>
+          <form id="provider-form">
+            <label>Provider name
+              <input type="text" id="name" required />
+            </label>
+            <label>Provider type
+              <select id="provider_type">
+                <option value="custom">custom</option>
+                <option value="openai">openai</option>
+                <option value="gemini">gemini</option>
+                <option value="ollama">ollama</option>
+              </select>
+            </label>
+            <label>Endpoint / Base URL
+              <input type="url" id="base_url" required />
+            </label>
+            <label>API key
+              <input type="text" id="api_key" />
+            </label>
+            <label>Model
+              <input type="text" id="model" />
+            </label>
+            <label>
+              <input type="checkbox" id="conversation_enabled" /> Enable for Conversation
+            </label>
+            <label>
+              <input type="checkbox" id="fast_learning_enabled" /> Enable for Fast Learning
+            </label>
+            <div class="buttons">
+              <button type="submit">Save API</button>
+              <button type="button" id="test-provider">Test</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Fast Learning</h2>
+          <label>Saved teacher
+            <select id="fast-teacher"></select>
+          </label>
+          <div class="buttons">
+            <button id="run-fast-learning">Run Fast Learning</button>
+          </div>
+          <div id="fast-status" class="status-box"></div>
+        </section>
+
+        <section class="card">
+          <h2>Conversation Learning</h2>
+          <textarea id="learn-message" rows="5" placeholder="Example: KAI, learn this: my favorite language is English."></textarea>
+          <div class="buttons">
+            <button id="save-learn">Save learned fact</button>
+          </div>
+          <div id="learn-status" class="status-box"></div>
+        </section>
+      </main>
+
+      <section class="card table-card">
+        <h2>Saved providers</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Model</th>
+              <th>Conversation</th>
+              <th>Fast Learning</th>
+            </tr>
+          </thead>
+          <tbody id="provider-table"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
